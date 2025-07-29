@@ -1,0 +1,25 @@
+body { font-family: sans-serif; background-color: #f9f9f9; color: #333; margin: 0; }
+.admin-container { padding: 40px; max-width: 1200px; margin: auto; }
+.admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 2px solid #eee; padding-bottom: 20px; }
+.admin-header h1 { color: #28a745; }
+.btn { display: inline-block; padding: 10px 20px; text-decoration: none; color: #fff; background-color: #28a745; border-radius: 5px; transition: background-color 0.3s; }
+.btn:hover { background-color: #218838; }
+.btn-logout { background-color: #6c757d; }
+
+.admin-tabs { display: flex; gap: 10px; margin-bottom: 30px; border-bottom: 1px solid #ddd; }
+.tab-link { padding: 10px 20px; text-decoration: none; color: #555; border-bottom: 3px solid transparent; }
+.tab-link.active { color: #28a745; border-bottom-color: #28a745; font-weight: bold; }
+
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+.content-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.content-header h2 { font-size: 1.5em; color: #333; margin: 0; }
+.status-message { color: green; background-color: #e6ffed; border: 1px solid #b7e9c7; padding: 10px; border-radius: 5px; margin-bottom: 20px; }
+
+table { width: 100%; border-collapse: collapse; background-color: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+th, td { border: 1px solid #ddd; padding: 12px; text-align: left; vertical-align: middle; }
+th { background-color: #f2f2f2; }
+.action-links a { margin-right: 10px; text-decoration: none; }
+.action-links .edit { color: #007bff; }
+.action-links .delete { color: #dc3545; }
