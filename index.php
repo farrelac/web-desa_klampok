@@ -20,7 +20,7 @@ $result_berita = $conn->query($query_berita);
         <div class="container">
             <h2>Selamat Datang di Desa Klampok!</h2>
             <p>Menjelajahi Keindahan dan Potensi Desa Klampok, Kota Malang.</p>
-            <a href="#profil-desa" class="btn">Lihat Lebih Lengkap</a>
+            <a href="#profil-desa" class="btn">Lihat Selengkapnya</a>
         </div>
     </section>
 
