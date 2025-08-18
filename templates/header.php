@@ -8,7 +8,7 @@ require_once 'config/database.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desa Klampok - Kota Malang</title>
+    <title>Desa Klampok - Kabupaten Malang</title>
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link rel="icon" href="img/favicon.ico" type="image/x-icon"> 
@@ -18,10 +18,10 @@ require_once 'config/database.php';
         <div class="container">
             <div class="logo">
                 <a href="index.php">
-                    <img src="https://placehold.co/60x60/1F3A66/ffffff?text=K" alt="Logo Desa Klampok">
+                    <img src="img/logo_kab_malang.png" alt="Logo Desa Klampok">
                     <div>
                         <h1>Desa Klampok</h1>
-                        <p>Kota Malang</p>
+                        <p>Kabupaten Malang</p>
                     </div>
                 </a>
             </div>

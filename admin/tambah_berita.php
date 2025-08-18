@@ -66,8 +66,8 @@ if (!isset($_SESSION['admin_logged_in'])) {
         <a href="dashboard.php" style="margin-bottom: 20px; display: inline-block;">← Kembali ke Dashboard</a>
         <h2>Tambah Berita Baru</h2>
         <div class="form-container">
-            <!-- Form akan dikirim ke proses.php. enctype diperlukan untuk upload file -->
-            <form action="proses.php?aksi=tambah" method="POST" enctype="multipart/form-data">
+            <form action="proses_berita.php?aksi=tambah" method="POST" enctype="multipart/form-data">
+
                 <div class="form-group">
                     <label for="judul">Judul Berita:</label>
                     <input type="text" id="judul" name="judul" required>

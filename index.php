@@ -17,7 +17,7 @@ $result_berita = $conn->query($query_berita);
     <section id="beranda" class="hero fade-in active">
         <div class="container">
             <h2>Selamat Datang di Desa Klampok!</h2>
-            <p>Menjelajahi Keindahan dan Potensi Desa Klampok, Kota Malang.</p>
+            <p>Menjelajahi Keindahan dan Potensi Desa Klampok, Kabupaten Malang.</p>
             <a href="#profil-desa" class="btn">Lihat Selengkapnya</a>
         </div>
     </section>
@@ -173,7 +173,7 @@ $result_berita = $conn->query($query_berita);
             <div class="grid-2">
                 <div class="kontak-info">
                     <h3>Kantor Desa Klampok</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Alamat: [Alamat Lengkap Kantor Desa Klampok], Kecamatan [Nama Kecamatan], Kota Malang, Jawa Timur</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Alamat: Jl. Raya Klampok Timur No.190, Krajan, Klampok, Kec. Singosari, Kabupaten Malang, Jawa Timur 65153</p>
                     <p><i class="fas fa-phone"></i> Telepon: [Nomor Telepon Desa]</p>
                     <p><i class="fas fa-envelope"></i> Email: <a href="mailto:info@desaklampok.or.id">info@desaklampok.or.id</a></p>
                     <p><i class="fas fa-clock"></i> Jam Kerja: Senin - Jumat, 08:00 - 16:00 WIB</p>
@@ -181,7 +181,7 @@ $result_berita = $conn->query($query_berita);
                 </div>
                 <div class="peta-lokasi">
                     <h3>Peta Lokasi</h3>
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.791559992019!2d112.5857218147775!3d-7.925525994276707!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd629472f7e71f9%3A0x6b2e1c9e8e2b8b9!2sDesa%20Klampok!5e0!3m2!1sid!2sid!4v1678901234567!5m2!1sid!2sid" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2446.1338166148134!2d112.64994926452016!3d-7.886676819815327!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd62a5b814db1df%3A0x3c41d2afe2170d27!2sKepala%20Desa%20Klampok%20Lama!5e0!3m2!1sid!2sid!4v1755419945747!5m2!1sid!2sid" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
         </div>

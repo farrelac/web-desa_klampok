@@ -4,7 +4,7 @@
                 <!-- Kolom 1: Tentang & Sosial Media -->
                 <div class="footer-col" id="footer-about">
                     <a href="index.php" class="logo-footer">
-                        <img src="https://placehold.co/40x40/8B4513/ffffff?text=K" alt="Logo Desa Klampok">
+                        <img src="img/logo_kab_malang.png" height=60px width=60px alt="Logo Desa Klampok">
                         <h4>Desa Klampok</h4>
                     </a>
                     <p class="footer-description">
@@ -44,9 +44,9 @@
                 <div class="footer-col" id="footer-contact">
                     <h5>Hubungi Kami</h5>
                     <address>
-                        <p><i class="fas fa-map-marker-alt"></i><span>Jl. Raya Klampok, Kecamatan Klojen, Kota Malang, Jawa Timur</span></p>
-                        <p><i class="fas fa-phone"></i><a href="tel:+6281234567890">(0341) 123-456</a></p>
-                        <p><i class="fas fa-envelope"></i><a href="mailto:kontak@desaklampok.id">kontak@desaklampok.id</a></p>
+                        <p><i class="fas fa-map-marker-alt"></i><span> Jl. Raya Klampok Timur No.190, Krajan, Klampok, Kec. Singosari, Kabupaten Malang, Jawa Timur 65153</span></p>
+                        <p><i class="fas fa-phone"></i><a href="tel:+6281234567890"> (0341) 123-456</a></p>
+                        <p><i class="fas fa-envelope"></i><a href="mailto:kontak@desaklampok.id"> kontak@desaklampok.id</a></p>
                     </address>
                 </div>
             </div>
