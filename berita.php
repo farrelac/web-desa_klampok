@@ -70,6 +70,9 @@ echo "<script>document.title = 'Arsip Berita & Pengumuman - Desa Klampok';</scri
                 </nav>
             <?php endif; ?>
 
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="index.php#berita" class="btn">Kembali</a>
+            </div>
         </div>
     </div>
 </main>

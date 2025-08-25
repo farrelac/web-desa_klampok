@@ -1,48 +1,69 @@
 <?php
-// Panggil header. Diasumsikan 'config/database.php' sudah dipanggil di sini.
 require_once 'templates/header.php';
 
-// Fungsi untuk menampilkan komentar (VERSI STABIL, TANPA AVATAR)
+// FUNGSI BARU UNTUK MENAMPILKAN KOMENTAR
 function tampilkan_komentar($parent_id, $semua_komentar, $id_berita)
 {
     $html = '';
     $komentar_anak = array_filter($semua_komentar, fn($k) => $k['parent_id'] == $parent_id);
+
     if (count($komentar_anak) > 0) {
-        $html .= ($parent_id !== NULL) ? "<div class='comment-replies'>" : "<ul class='comment-list'>";
-        
+        // Tentukan kelas CSS berdasarkan level kedalaman
+        $ul_class = ($parent_id !== NULL) ? 'comment-replies' : 'comment-list';
+        $html .= "<ul class='$ul_class'>";
+
         foreach ($komentar_anak as $komen) {
-            $nama_tampil = isset($komen['nama']) ? htmlspecialchars($komen['nama']) : 'Anonim';
-            
+            $nama_tampil = !empty($komen['nama']) ? htmlspecialchars($komen['nama']) : 'Anonim';
+            $avatar_initial = strtoupper(substr($nama_tampil, 0, 1));
+
             $html .= "<li class='comment-item' id='comment-{$komen['id']}'>";
-            $html .= "<div class='comment-body'>";
-            $html .= "<div class='comment-author'>{$nama_tampil}</div>";
-            $html .= "<div class='comment-date'>" . date('d F Y, H:i', strtotime($komen['tanggal_komentar'])) . "</div>";
+            $html .= "<div class='comment-wrapper'>";
+
+            // Kolom Avatar
+            $html .= "<div class='comment-avatar'><span>{$avatar_initial}</span></div>";
+
+            // Kolom Konten Komentar
+            $html .= "<div class='comment-content'>";
+            $html .= "<div class='comment-header'>";
+            $html .= "<span class='comment-author'>{$nama_tampil}</span>";
+            $html .= "<span class='comment-date'>" . date('d F Y, H:i', strtotime($komen['tanggal_komentar'])) . "</span>";
+            $html .= "</div>";
             $html .= "<div class='comment-text'>" . nl2br(htmlspecialchars($komen['komentar'])) . "</div>";
-            $html .= "<a href='#' class='reply-btn' data-comment-id='{$komen['id']}'>Balas</a>";
+
+            // Aksi Komentar (Balas)
+            $html .= "<div class='comment-actions'>";
+            $html .= "<a href='#' class='reply-btn' data-comment-id='{$komen['id']}'><i class='fas fa-reply'></i> Balas</a>";
             $html .= "</div>";
 
-            $html .= "<div class='reply-form-container' id='reply-form-{$komen['id']}' style='display:none;'><form action='proses_komentar.php' method='POST'><input type='hidden' name='berita_id' value='{$id_berita}'><input type='hidden' name='parent_id' value='{$komen['id']}'><div class='form-group'><textarea name='komentar' placeholder='Tulis balasan...' rows='3' required></textarea></div><button type='submit' class='btn-small'>Kirim Balasan</button></form></div>";
-            
+            // Form Balasan (tersembunyi)
+            $html .= "<div class='reply-form-container' id='reply-form-{$komen['id']}' style='display:none;'>";
+            $html .= "<form action='proses_komentar.php' method='POST'>";
+            $html .= "<input type='hidden' name='berita_id' value='{$id_berita}'>";
+            $html .= "<input type='hidden' name='parent_id' value='{$komen['id']}'>";
+            $html .= "<textarea name='komentar' placeholder='Tulis balasan untuk {$nama_tampil}...' rows='3' required></textarea>";
+            $html .= "<button type='submit' class='btn btn-small'>Kirim Balasan</button>";
+            $html .= "</form>";
+            $html .= "</div>";
+
+            $html .= "</div>"; // Tutup .comment-content
+            $html .= "</div>"; // Tutup .comment-wrapper
+
+            // Panggil rekursif untuk balasan
             $html .= tampilkan_komentar($komen['id'], $semua_komentar, $id_berita);
-            
+
             $html .= "</li>";
         }
-        $html .= ($parent_id !== NULL) ? "</div>" : "</ul>";
+        $html .= "</ul>";
     }
     return $html;
 }
 
-// ALUR UTAMA HALAMAN
 $berita = null;
 $semua_komentar_arr = [];
 
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $id_berita = (int)$_GET['id'];
-    
-    // --- PERBAIKAN DI SINI ---
-    // Baris "$conn = require 'config/database.php';" DIHAPUS.
-    // Kita langsung gunakan variabel $conn yang sudah ada dari header.php
-    
+
     // Pastikan koneksi ada sebelum melanjutkan
     if (isset($conn) && $conn instanceof mysqli) {
         $stmt_berita = $conn->prepare("SELECT * FROM berita WHERE id = ?"); // Ini baris 44 yang error
@@ -68,8 +89,9 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 }
 ?>
 
+
 <main>
-    <div class="section-padding">
+    <div class="article-detail-container section-padding">
         <div class="container">
             <?php if ($berita): ?>
                 <article class="berita-detail-item">
@@ -84,32 +106,43 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                     </div>
                 </article>
 
+                <!-- ============================================= -->
+                <!--     BAGIAN KOMENTAR YANG DIROMBAK TOTAL     -->
+                <!-- ============================================= -->
                 <section id="kolom-komentar" class="comment-section-container">
-                    <div class="comment-section">
-                        <h3>Komentar</h3>
-                        <div class="comment-form">
-                            <h4>Tinggalkan Komentar</h4>
-                            <form action="proses_komentar.php" method="POST">
-                                <input type="hidden" name="berita_id" value="<?php echo $berita['id']; ?>">
-                                <input type="hidden" name="parent_id" value="">
-                                <div class="form-group">
-                                    <textarea name="komentar" rows="4" placeholder="Tulis komentar Anda di sini..." required></textarea>
-                                </div>
-                                <button type="submit" class="btn">Kirim Komentar</button>
-                            </form>
-                        </div>
-                        <div class="comments-list-container">
-                            <?php
-                            $daftar_komentar_html = tampilkan_komentar(NULL, $semua_komentar_arr, $berita['id']);
-                            if (empty($daftar_komentar_html)) {
-                                echo "<p>Jadilah yang pertama berkomentar!</p>";
-                            } else {
-                                echo $daftar_komentar_html;
-                            }
-                            ?>
-                        </div>
+                    <?php
+                    // Hitung jumlah komentar utama (bukan balasan)
+                    $jumlah_komentar_utama = count(array_filter($semua_komentar_arr, fn($k) => $k['parent_id'] == NULL));
+                    ?>
+                    <h3><?php echo $jumlah_komentar_utama; ?> Komentar</h3>
+
+                    <!-- Form Komentar Utama -->
+                    <div class="comment-form-main">
+                        <div class="comment-avatar"><span>A</span></div> <!-- 'A' untuk Anonim -->
+                        <form action="proses_komentar.php" method="POST">
+                            <input type="hidden" name="berita_id" value="<?php echo $berita['id']; ?>">
+                            <input type="hidden" name="parent_id" value=""> <!-- Kosong untuk komentar utama -->
+                            <textarea name="komentar" rows="1" placeholder="Tulis komentar Anda di sini..." required oninput="this.style.height = 'auto'; this.style.height = (this.scrollHeight) + 'px';"></textarea>
+                            <button type="submit" class="btn">Kirim</button>
+                        </form>
+                    </div>
+
+                    <!-- Daftar Komentar -->
+                    <div class="comments-list-container">
+                        <?php
+                        $daftar_komentar_html = tampilkan_komentar(NULL, $semua_komentar_arr, $berita['id']);
+                        if (empty($daftar_komentar_html)) {
+                            echo "<p class='text-center'>Jadilah yang pertama berkomentar!</p>";
+                        } else {
+                            echo $daftar_komentar_html;
+                        }
+                        ?>
                     </div>
                 </section>
+                <!-- ============================================= -->
+                <!--           AKHIR BAGIAN KOMENTAR            -->
+                <!-- ============================================= -->
+
 
                 <div style="text-align: center; margin-top: 40px;">
                     <a href="index.php" class="btn">Kembali Ke Halaman Utama</a>
@@ -126,6 +159,5 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 </main>
 
 <?php
-// Panggil footer
 require_once 'templates/footer.php';
 ?>

@@ -92,7 +92,10 @@ $berita = $result->fetch_assoc();
         <a href="dashboard.php" style="margin-bottom: 20px; display: inline-block;">← Kembali ke Dashboard</a>
         <h2>Edit Berita</h2>
         <div class="form-container">
-            <form action="proses.php?aksi=edit" method="POST" enctype="multipart/form-data">
+            
+            <!-- ==== PERBAIKAN DI BARIS INI ==== -->
+            <form action="proses_berita.php?aksi=edit" method="POST" enctype="multipart/form-data">
+
                 <!-- Tambahkan input tersembunyi untuk menyimpan ID -->
                 <input type="hidden" name="id" value="<?php echo $berita['id']; ?>">
 
