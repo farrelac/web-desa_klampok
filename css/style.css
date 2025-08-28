@@ -482,7 +482,7 @@ header .logo p { text-align: center; margin: 2px 0 0 0; font-size: 0.9em; color:
 }
 
 .berita-detail-item h1 {
-    font-size: 2.8em;
+    font-size: 2.4em;
     color: var(--text-color);
     line-height: 1.3;
     margin-bottom: 20px;
@@ -728,6 +728,27 @@ section[id] {
     flex-direction: column;
     align-items: flex-end; /* Tombol ke kanan */
 }
+
+/* === TAMBAHAN STYLE UNTUK INPUT NAMA === */
+.comment-form-main .form-group-inline {
+    width: 100%;
+    margin-bottom: 10px;
+}
+.comment-form-main input[type="text"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 1em;
+}
+.comment-form-main input[type="text"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(31, 58, 102, 0.2);
+}
+/* ======================================= */
+
 .comment-form-main textarea {
     width: 100%;
     padding: 12px 15px;

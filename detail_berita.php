@@ -63,10 +63,8 @@ $semua_komentar_arr = [];
 
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $id_berita = (int)$_GET['id'];
-
-    // Pastikan koneksi ada sebelum melanjutkan
     if (isset($conn) && $conn instanceof mysqli) {
-        $stmt_berita = $conn->prepare("SELECT * FROM berita WHERE id = ?"); // Ini baris 44 yang error
+        $stmt_berita = $conn->prepare("SELECT * FROM berita WHERE id = ?");
         $stmt_berita->bind_param("i", $id_berita);
         $stmt_berita->execute();
         $result_berita = $stmt_berita->get_result();
@@ -82,13 +80,9 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
             $stmt_komentar->close();
             echo "<script>document.title = '" . htmlspecialchars($berita['judul']) . " - Desa Klampok';</script>";
         }
-    } else {
-        // Tampilkan pesan error jika koneksi tidak ditemukan
-        echo "Koneksi database gagal.";
     }
 }
 ?>
-
 
 <main>
     <div class="article-detail-container section-padding">
@@ -116,14 +110,21 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                     ?>
                     <h3><?php echo $jumlah_komentar_utama; ?> Komentar</h3>
 
-                    <!-- Form Komentar Utama -->
+                    <!-- Form Komentar Utama (DENGAN KOLOM NAMA) -->
                     <div class="comment-form-main">
-                        <div class="comment-avatar"><span>A</span></div> <!-- 'A' untuk Anonim -->
+                        <div class="comment-avatar"><span>A</span></div>
                         <form action="proses_komentar.php" method="POST">
                             <input type="hidden" name="berita_id" value="<?php echo $berita['id']; ?>">
-                            <input type="hidden" name="parent_id" value=""> <!-- Kosong untuk komentar utama -->
+                            <input type="hidden" name="parent_id" value="">
+
+                            <!-- ==== PERBAIKAN DI SINI: Tambahkan input untuk nama ==== -->
+                            <div class="form-group-inline">
+                                <input type="text" name="nama" placeholder="Nama Lengkap Anda..." required>
+                            </div>
+
                             <textarea name="komentar" rows="1" placeholder="Tulis komentar Anda di sini..." required oninput="this.style.height = 'auto'; this.style.height = (this.scrollHeight) + 'px';"></textarea>
-                            <button type="submit" class="btn">Kirim</button>
+
+                            <button type="submit" class="btn">Kirim Komentar</button>
                         </form>
                     </div>
 
